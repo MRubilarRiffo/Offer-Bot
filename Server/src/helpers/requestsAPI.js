@@ -18,7 +18,7 @@ const getRandomProxy = (proxies) => {
     return `socks5://${user}:${password}@${ip}:${port}`;
 };
 
-const requestsAPI = async (url, retryCount = 3) => {
+const requestsAPI = async (url, headers = null, retryCount = 3) => {
     const proxies = proxiesCache || loadProxies();
     
     for (let i = 0; i < retryCount; i++) {
@@ -26,7 +26,8 @@ const requestsAPI = async (url, retryCount = 3) => {
             const proxyUrl = getRandomProxy(proxies);
             const agent = new SocksProxyAgent(proxyUrl);
             const response = await axios.get(url, {
-                httpsAgent: agent
+                httpsAgent: agent,
+                headers: headers
             });
             return response.data;
         } catch (error) {

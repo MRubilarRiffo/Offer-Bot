@@ -17,6 +17,9 @@ module.exports = (sequelize) => {
 		image_url: {
 			type: DataTypes.STRING,
 		},
+		url: {
+			type: DataTypes.STRING,
+		},
 		store: {
 			type: DataTypes.ARRAY(DataTypes.STRING),
 		},

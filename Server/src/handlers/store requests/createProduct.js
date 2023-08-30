@@ -2,18 +2,18 @@ const { Product } = require('../../db');
 
 const createProduct = async (product) => {
     try {
-        await Product.create({
-            name: product.brand_title,
+        const result = await Product.create({
+            name: product.name,
             product_id: product.product_id,
-            first_price: product.last_variation_price,
-            last_price: product.current_price,
+            first_price: product.first_price,
+            last_price: product.last_price,
             url: product.url,
-            store: product.retail,
-            discount: product.percent,
-            image_url: product.image.replace(/\[/g, '%5B').replace(/\]/g, '%5D')
+            store: product.store,
+            discount: product.discount,
+            image_url: product.image_url
         });
     
-        return
+        return result;
     } catch (error) {
         throw new Error('Error al crear producto');
     };
