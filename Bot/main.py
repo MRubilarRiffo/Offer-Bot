@@ -4,17 +4,18 @@ from telegram import Bot
 from telegram.error import InvalidToken
 from config import TOKEN, CANAL_ID, sortOrder, fields, sent_products
 from telegram_functions import send_data
+from log_functions import log_message
 
 async def check_api_every_minute():
     try:
         bot = Bot(token=TOKEN)
     except InvalidToken:
-        print("El token proporcionado no es válido. Asegúrate de usar el token correcto del BotFather.")
+        log_message("El token proporcionado no es válido. Asegúrate de usar el token correcto del BotFather.")
         sys.exit(1)
 
     while True:
         await send_data(bot, sortOrder, fields, CANAL_ID, sent_products)
-        print("Esperando...")
+        log_message("Esperando...")
         await asyncio.sleep(300)
 
 if __name__ == '__main__':
