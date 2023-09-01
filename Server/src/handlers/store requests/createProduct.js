@@ -10,12 +10,13 @@ const createProduct = async (product) => {
             url: product.url,
             store: product.store,
             discount: product.discount,
-            image_url: product.image_url
+            image_url: product.image_url,
+            sent: false
         });
     
         return result;
     } catch (error) {
-        throw new Error('Error al crear producto');
+        throw new Error(`Error al crear producto: ${error}`);
     };
 };
 

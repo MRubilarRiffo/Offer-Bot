@@ -31,7 +31,11 @@ module.exports = (sequelize) => {
 		},
 		discount: {
 			type: DataTypes.INTEGER,
-		}
+		},
+		sent: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+		},
 	}, {
 		timestamps: true,
 	});

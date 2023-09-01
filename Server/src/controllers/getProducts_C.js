@@ -38,7 +38,6 @@ const getProducts_C = async (req, res, next) => {
         };
     } catch (error) {
         next(error);
-        // res.status(500).json({ error: 'Error al obtener productos' });
     };
 };
 

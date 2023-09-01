@@ -1,5 +1,6 @@
 const { createProduct } = require("../handlers/store requests/createProduct");
 const { getProduct } = require("../handlers/store requests/getProduct");
+const { logMessage } = require("../helpers/logMessage");
 const { requestsAPI } = require("../helpers/requestsAPI");
 const { sleep } = require("../helpers/sleep");
 
@@ -25,9 +26,9 @@ const getJumbo = async () => {
             let total_page = Math.ceil(total_products / product_x_page);
 
             while (page <= total_page) {
-                console.log("Categorie: " + categorie);
-                console.log("Page: " + page);
-                console.log("Total Page: " + total_page);
+                logMessage("Categorie: " + categorie);
+                logMessage("Page: " + page);
+                logMessage("Total Page: " + total_page);
     
                 const api = `https://sm-web-api.ecomm.cencosud.com/catalog/api/v4/products/${categorie}?s=promotion%3Ayes&page=${page}`
     
@@ -52,14 +53,14 @@ const getJumbo = async () => {
                                 discount: Math.round(100-(product.items[0].sellers[0].commertialOffer.Price * 100 / product.items[0].sellers[0].commertialOffer.ListPrice)),
                                 image_url: product.items[0].images[0].imageUrl
                             });
-
+                            
                             if (result) {
-                                console.log("El producto se creó exitosamente:", result.id);
+                                logMessage("El producto se creó exitosamente:", result.id);
                             } else {
-                                console.log("La creación del producto falló.");
+                                logMessage("La creación del producto falló.");
                             };
                         } else {
-                            console.log("El producto ya existe.");
+                            logMessage("El producto ya existe.");
                         };
                     };
                 };
