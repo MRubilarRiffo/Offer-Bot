@@ -13,12 +13,12 @@ NAME = 'name'
 IMAGE_URL = 'image_url'
 URL = 'url'
 STORE = 'store'
-FIRST_PRICE = 'first_price'
-LAST_PRICE = 'last_price'
+OFFER_PRICE = 'offer_price'
+NORMAL_PRICE = 'normal_price'
 DISCOUNT = 'discount'
 ID = 'product_id'
 
 sortOrder = ASC
-fields = f'{NAME},{IMAGE_URL},{URL},{STORE},{FIRST_PRICE},{FIRST_PRICE},{DISCOUNT},{ID}'
+fields = f'{NAME},{IMAGE_URL},{URL},{STORE},{NORMAL_PRICE},{OFFER_PRICE},{DISCOUNT},{ID}'
 
 sent_products = set()

@@ -21,7 +21,7 @@ const getKnasta = async () => {
 
             total_pages_ = total_pages
 
-            if (products) {
+            if (products.length) {
                 for (let product of products) {
                     const id = product.product_id ? `Knasta-${product.product_id}` : null;
 
@@ -32,8 +32,8 @@ const getKnasta = async () => {
                     const props = {
                         name: product.title,
                         product_id: id,
-                        first_price: product.current_price,
-                        last_price: product.last_variation_price,
+                        offer_price: product.current_price,
+                        normal_price: product.last_variation_price,
                         url: product.url,
                         store: product.retail,
                         discount: product.percent,
@@ -48,7 +48,7 @@ const getKnasta = async () => {
                             : `El producto con id ${id} se creó exitosamente.`);
                     } else {
                         logMessage(`El producto con id: ${id} ya existe.`);
-                        if (product.current_price !== existingProduct.first_price) {
+                        if (product.current_price !== existingProduct.offer_price) {
                             logMessage(`El producto con id: ${id} cambió de precio.`);
                             const result = await updateProduct_H(props, id);
                             if (result) logMessage(`El producto con id: ${id} fue actualizado.`);

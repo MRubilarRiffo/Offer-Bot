@@ -10,7 +10,7 @@ const getProducts_H = async (page, limit, filters, sortOrder, selectedFields, ra
         
         const order = sortOrder === 'desc' ? 'DESC' : 'ASC';
         
-        const allowedFields = ['name', 'product_id', 'first_price', 'last_price', 'url', 'store', 'discount', 'image_url', 'createdAt', 'updatedAt'];
+        const allowedFields = ['name', 'product_id', 'offer_price', 'normal_price', 'url', 'store', 'discount', 'image_url', 'createdAt', 'updatedAt'];
         
         let attributes = selectedFields && selectedFields.filter(field => allowedFields.includes(field));
         

@@ -23,10 +23,10 @@ module.exports = (sequelize) => {
 		store: {
 			type: DataTypes.ARRAY(DataTypes.STRING),
 		},
-		first_price: {
+		offer_price: {
 			type: DataTypes.INTEGER,
 		},
-		last_price: {
+		normal_price: {
 			type: DataTypes.INTEGER,
 		},
 		discount: {

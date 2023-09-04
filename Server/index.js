@@ -4,13 +4,15 @@ const { conn } = require('./src/db');
 const { getKnasta } = require('./src/scraping/knasta');
 const { getJumbo } = require('./src/scraping/Jumbo');
 const { logMessage } = require('./src/helpers/logMessage');
+const { getUnimarc } = require('./src/scraping/Unimarc');
 
 const PORT = 3001;
 
 const executeTask = async () => {
     try {
-        await getJumbo();
-        await getKnasta();
+        // await getJumbo();
+        // await getKnasta();
+        await getUnimarc();
         logMessage('Tarea programada ejecutada');
     } catch (error) {
         logMessage(`Error al ejecutar la tarea programada: ${error}`);

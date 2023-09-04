@@ -46,8 +46,8 @@ const getJumbo = async () => {
                             const result = await createProduct({
                                 name: product.productName,
                                 product_id: id,
-                                first_price: product.items[0].sellers[0].commertialOffer.Price,
-                                last_price: product.items[0].sellers[0].commertialOffer.ListPrice,
+                                offer_price: product.items[0].sellers[0].commertialOffer.Price,
+                                normal_price: product.items[0].sellers[0].commertialOffer.ListPrice,
                                 url: `https://www.jumbo.cl/${product.linkText}/p`,
                                 store: [product.items[0].sellers[0].sellerName],
                                 discount: Math.round(100-(product.items[0].sellers[0].commertialOffer.Price * 100 / product.items[0].sellers[0].commertialOffer.ListPrice)),
