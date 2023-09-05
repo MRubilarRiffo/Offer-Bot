@@ -4,9 +4,10 @@ const path = require('path');
 const axios = require('axios');
 
 let proxiesCache = null;
+let userAgentCache = null;
 
 const loadProxies = () => {
-    const proxiesFilePath = path.join(__dirname, '..', 'files', 'proxies.txt');
+    const proxiesFilePath = path.join(__dirname, '..', '..', 'Files', 'proxies.txt');
     const proxies = fs.readFileSync(proxiesFilePath, 'utf-8').trim().split('\n');
     proxiesCache = proxies;
     return proxies;
@@ -18,12 +19,27 @@ const getRandomProxy = (proxies) => {
     return `socks5://${user}:${password}@${ip}:${port}`;
 };
 
-const requestsAPI = async (url, headers = null, retryCount = 3) => {
+const loadUserAgent = () => {
+    const userAgentFilePath = path.join(__dirname, '..', '..', 'Files', 'user-agent.txt');
+    const userAgent = fs.readFileSync(userAgentFilePath, 'utf-8').trim().split('\n');
+    userAgentCache = userAgent;
+    return userAgent;
+};
+
+const getRandomUserAgent = (userAgent) => {
+    const userAgentDetails = userAgent[Math.floor(Math.random() * userAgent.length)];
+    return userAgentDetails.trim();
+};
+
+const requestsAPI = async (url, headers = {}, retryCount = 3) => {
     const proxies = proxiesCache || loadProxies();
+    const userAgent = userAgentCache || loadUserAgent();
     
     for (let i = 0; i < retryCount; i++) {
         try {
             const proxyUrl = getRandomProxy(proxies);
+            const userAgentUrl = getRandomUserAgent(userAgent);
+            headers['User-Agent'] = userAgentUrl;
             const agent = new SocksProxyAgent(proxyUrl);
             const response = await axios.get(url, {
                 httpsAgent: agent,

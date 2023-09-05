@@ -1,8 +1,6 @@
-const { updateProduct_H } = require("../handlers/products/updateProducts_H");
-const { createProduct } = require("../handlers/store requests/createProduct");
-const { getProduct } = require("../handlers/store requests/getProduct");
 const { logMessage } = require("../helpers/logMessage");
 const { requestsAPI } = require("../helpers/requestsAPI");
+const { existingProduct_ } = require("../helpers/existingProduct");
 const { sleep } = require("../helpers/sleep");
 const axios = require('axios');
 const cheerio = require('cheerio');
@@ -29,7 +27,7 @@ const fetchAndAnalyzeURL = async () => {
         
         return foundSrc[3];
     } catch (error) {
-        console.error('Error al hacer la solicitud:', error);
+        logMessage(`Error al hacer la solicitud: ${error}`);
     };
 };
 
@@ -62,9 +60,7 @@ const getUnimarc = async () => {
             let total_pages = 1;
             let page = 1;
             while (page <= total_pages) {
-                logMessage("Categorie: " + categorie);
-                logMessage("Page: " + page);
-                logMessage("Total Page: " + total_pages);
+                logMessage(`${categorie} | Page: ${page} de ${total_pages}`);
     
                 const api = `${BASE_URL}/_next/data/${KEY}/category/${categorie}.json?page=${page}`;
 
@@ -80,8 +76,6 @@ const getUnimarc = async () => {
                         
                         if (!id) continue;
     
-                        const existingProduct = await getProduct(id);
-    
                         const props = {
                             name: product.name,
                             product_id: id,
@@ -90,20 +84,10 @@ const getUnimarc = async () => {
                             url: `https://www.unimarc.cl/product${product.slug}`.slice(0, -2),
                             store: ['Unimarc'],
                             discount: Math.round(100-(product.sellers[0].price * 100 / product.sellers[0].priceWithoutDiscount)),
-                            image_url: product.images[0],
-                            sent: false
+                            image_url: product.images[0]
                         };
     
-                        if (!existingProduct) {
-                            await createProduct(props);
-                        } else {
-                            logMessage(`El producto con id: ${id} ya existe.`);
-                            if (parseInt(product.sellers[0].price) !== existingProduct.offer_price) {
-                                logMessage(`El producto con id: ${id} cambió de precio.`);
-                                const result = await updateProduct_H(props, id);
-                                if (result) logMessage(`El producto con id: ${id} fue actualizado.`);
-                            };
-                        };
+                        existingProduct_(props, id, product.sellers[0].price);
                     };
                 };
                 page++;
@@ -111,7 +95,6 @@ const getUnimarc = async () => {
                 await sleep(SLEEP_DURATION);
             };
         };
-
     } catch (error) {
         logMessage(`Error: ${error}`);
     };
