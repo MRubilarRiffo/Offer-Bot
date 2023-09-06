@@ -9,7 +9,7 @@ const getJumbo = async () => {
         const HEADERS = { Apikey: 'WlVnnB7c1BblmgUPOfg' };
         
         const PRODUCT_X_PAGE = 40;
-        const BASE_URL = "https://sm-web-api.ecomm.cencosud.com";
+        const BASE_URL = 'https://sm-web-api.ecomm.cencosud.com';
         const SLEEP_DURATION = 10;
         
         const categories = [
@@ -54,7 +54,7 @@ const getJumbo = async () => {
                             image_url: product.items[0].images[0].imageUrl
                         };
 
-                        existingProduct_(props, id, product.items[0].sellers[0].commertialOffer.Price);
+                        existingProduct_(props, id);
                     };
                 };
                 page++;

@@ -38,7 +38,7 @@ const getKnasta = async () => {
                         image_url: product.image
                     };
 
-                    existingProduct_(existingProduct, props, id, product.current_price);
+                    existingProduct_(props, id);
                 };
             };
             

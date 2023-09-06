@@ -87,7 +87,7 @@ const getUnimarc = async () => {
                             image_url: product.images[0]
                         };
     
-                        existingProduct_(props, id, product.sellers[0].price);
+                        existingProduct_(props, id);
                     };
                 };
                 page++;
