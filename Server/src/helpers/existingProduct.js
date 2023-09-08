@@ -8,13 +8,13 @@ const existingProduct_ = async (props, id) => {
 
     if (!existingProduct) {
         const result = await createProduct(props);
-        if (result) logMessage(`El producto con id: ${id} se creó exitosamente.`)
+        
+        if (result) logMessage(`El producto id: ${id} se creó exitosamente.`)
     } else {
-        logMessage(`El producto con id: ${id} ya existe.`);
+        logMessage(`El producto id: ${id} ya existe.`);
         if (parseInt(props.offer_price) !== existingProduct.offer_price) {
-            logMessage(`El producto con id: ${id} cambió de precio.`);
             const result = await updateProduct_H(props, id);
-            if (result) logMessage(`El producto con id: ${id} fue actualizado.`);
+            if (result) logMessage(`El producto id: ${id} fue actualizado de precio.`);
         };
     };
 };

@@ -9,15 +9,16 @@ const getProducts_C = async (req, res, next) => {
             name: req.query.name,
             store: req.query.store,
             discount: req.query.discount,
+            minDiscount: req.query.minDiscount,
+            maxDiscount: req.query.maxDiscount,
+            sent: req.query.sent
         };
 
         const sortOrder = req.query.sortOrder || 'asc';
 
         const selectedFields = req.query.fields ? req.query.fields.split(',') : null;
 
-        const random = req.query.random || false;
-
-        const products = await getProducts_H(currentPage, productsPerPage, filters, sortOrder, selectedFields, random);
+        const products = await getProducts_H(currentPage, productsPerPage, filters, sortOrder, selectedFields);
         
         if (products.error) {
             res.status(400).send(products.error);

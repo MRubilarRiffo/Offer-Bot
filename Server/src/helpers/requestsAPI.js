@@ -2,6 +2,7 @@ const fs = require('fs');
 const { SocksProxyAgent } = require('socks-proxy-agent');
 const path = require('path');
 const axios = require('axios');
+const { logMessage } = require('./logMessage');
 
 let proxiesCache = null;
 let userAgentCache = null;
@@ -48,7 +49,7 @@ const requestsAPI = async (url, headers = {}, retryCount = 3) => {
             return response.data;
         } catch (error) {
             if (i === retryCount - 1) {
-                throw error;
+                logMessage(`Error: ${error}`);
             }
             console.warn(`Attempt ${i + 1} failed. Retrying...`);
         };

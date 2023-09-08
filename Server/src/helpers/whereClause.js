@@ -10,15 +10,25 @@ const whereClause = (filters) => {
     };
 
     if (filters.store) {
-        whereClause.sport = {
-            [Op.contains]: [filters.sport]
+        whereClause.store = {
+            [Op.contains]: [filters.store]
         };
     };
 
-    if (filters.discount) {
-        whereClause.discount = {
-            [Op.gte]: filters.discount
+    if (filters.minDiscount || filters.maxDiscount) {
+        whereClause.discount = {};
+    
+        if (filters.minDiscount) {
+            whereClause.discount[Op.gte] = filters.minDiscount;
         };
+    
+        if (filters.maxDiscount) {
+            whereClause.discount[Op.lte] = filters.maxDiscount;
+        };
+    };
+
+    if (filters.sent === 'false' || filters.sent === 'true') {
+        whereClause.sent = filters.sent
     };
 
     return whereClause;

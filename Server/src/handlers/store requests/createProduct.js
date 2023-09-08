@@ -11,7 +11,9 @@ const createProduct = async (product) => {
             store: product.store,
             discount: product.discount,
             image_url: product.image_url,
-            sent: false
+            sent: false,
+            message: product.message,
+            thread_id: product.thread_id
         });
     
         return result;

@@ -36,7 +36,13 @@ module.exports = (sequelize) => {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false,
 		},
+		message: {
+			type: DataTypes.TEXT,
+		},
+		thread_id: {
+			type: DataTypes.ARRAY(DataTypes.INTEGER)
+		}
 	}, {
-		timestamps: true,
+		timestamps: false,
 	});
 };
