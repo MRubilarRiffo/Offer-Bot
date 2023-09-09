@@ -1,5 +1,6 @@
 const { getProducts_H } = require('../handlers/products/getProducts_H');
 const { getTotalProducts } = require('../handlers/products/getTotalProducts_H');
+const { whereClause } = require('../helpers/whereClause');
 
 const getProducts_C = async (req, res, next) => {
     try {
@@ -23,7 +24,9 @@ const getProducts_C = async (req, res, next) => {
         if (products.error) {
             res.status(400).send(products.error);
         } else {
-            const totalProducts = await getTotalProducts(filters);
+            const where = whereClause(filters)
+
+            const totalProducts = await getTotalProducts(where);
 
             const totalPages = Math.ceil(totalProducts / productsPerPage);
 

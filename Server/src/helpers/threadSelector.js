@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { CANAL_PREMIUM_ID, THREAD_ID_SUPERMARKET, THREAD_ID_10_DCTO, THREAD_ID_30_DCTO, THREAD_ID_60_DCTO, THREAD_ID_80_DCTO } = process.env;
+const { THREAD_ID_SUPERMARKET, THREAD_ID_10_DCTO, THREAD_ID_30_DCTO, THREAD_ID_60_DCTO, THREAD_ID_80_DCTO } = process.env;
 
 const threadSelector = (discount, supermarket = false) => {
     if (supermarket) {

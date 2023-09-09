@@ -1,8 +1,12 @@
 const { Product } = require('../../db');
 
-const createProduct = async (product) => {
+const createProduct_H = async (product) => {
     try {
-        const result = await Product.create({
+        if (!product || typeof product !== 'object') {
+            throw new Error('El parámetro "product" no es válido.');
+        };
+
+        return await Product.create({
             name: product.name,
             product_id: product.product_id,
             offer_price: product.offer_price,
@@ -13,14 +17,13 @@ const createProduct = async (product) => {
             image_url: product.image_url,
             sent: false,
             message: product.message,
-            thread_id: product.thread_id
+            thread_id: product.thread_id,
+            market: product.market
         });
-    
-        return result;
     } catch (error) {
         console.log(error);
         throw new Error(`Error al crear producto: ${error}`);
     };
 };
 
-module.exports = { createProduct };
+module.exports = { createProduct_H };

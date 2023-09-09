@@ -4,12 +4,16 @@ const { logMessage } = require('../helpers/logMessage');
 const { existingProduct_ } = require('../helpers/existingProduct');
 const { createMessageHTML } = require('../helpers/createMessageHTML');
 const { threadSelector } = require('../helpers/threadSelector');
+const { getTotalProducts } = require('../handlers/products/getTotalProducts_H');
 
 const getKnasta = async () => {
     try {
         const SLEEP_DURATION = 10;
         const BASE_URL = 'https://knasta.cl';
+        const MARKET = 'Knasta'
 
+        const countProducts = await getTotalProducts({ market: MARKET });
+        
         let total_pages_ = 1;
         let page = 1;
         while (page <= total_pages_) {
@@ -23,13 +27,15 @@ const getKnasta = async () => {
 
             total_pages_ = total_pages;
 
+            if (countProducts === total_pages_) break;
+
             if (products.length) {
                 for (let product of products) {
                     const id = product.product_id ? `Knasta-${product.product_id}` : null;
 
-                    if (!id) continue;
+                    if (!id || !product.url) continue;
 
-                    const thread_id = threadSelector(product.percent * -1, product.retail === ['Lider_supermercado'] && true)
+                    const thread_id = threadSelector(product.percent * -1, product.retail == ['Lider_supermercado'] && true)
 
                     const props = createMessageHTML(
                         product.title,
@@ -40,7 +46,8 @@ const getKnasta = async () => {
                         product.url,
                         id,
                         product.image,
-                        thread_id
+                        thread_id,
+                        MARKET
                     );
 
                     await existingProduct_(props, id);

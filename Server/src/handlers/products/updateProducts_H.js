@@ -1,14 +1,14 @@
 const { Product } = require('../../db');
 
-const updateProduct_H = async (props, id) => {
+const updateProduct_H = async (props, where) => {
     try {
-        const result = await Product.update(props, {
-            where: { product_id: id }
-        });
+        if (!where || typeof where !== 'object') {
+            throw new Error('El parámetro "where" no es válido.');
+        };
 
-        return result;
+        return await Product.update(props, { where });
     } catch (error) {
-        throw new Error(`Error updating product: ${error}`);
+        throw new Error(`Error al actualizar producto: ${error}`);
     };
 };
 

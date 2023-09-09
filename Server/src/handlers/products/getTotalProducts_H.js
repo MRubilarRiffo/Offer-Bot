@@ -1,15 +1,12 @@
 const { Product } = require('../../db');
-const { whereClause } = require('../../helpers/whereClause');
 
-const getTotalProducts = async (filters) => {
+const getTotalProducts = async (where) => {
     try {
-        const where = await whereClause(filters);
+        if (!where || typeof where !== 'object') {
+            throw new Error('El parámetro "where" no es válido.');
+        };
 
-        const totalProducts = await Product.count({
-            where: where,
-        });
-
-        return totalProducts;
+        return await Product.count({ where });
     } catch (error) {
         throw new Error('Error al obtener la cantidad total de productos');
     };

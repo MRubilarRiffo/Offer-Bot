@@ -15,10 +15,10 @@ module.exports = (sequelize) => {
 			unique: true,
 		},
 		image_url: {
-			type: DataTypes.STRING,
+			type: DataTypes.STRING(512),
 		},
 		url: {
-			type: DataTypes.STRING,
+			type: DataTypes.STRING(512),
 		},
 		store: {
 			type: DataTypes.ARRAY(DataTypes.STRING),
@@ -32,15 +32,26 @@ module.exports = (sequelize) => {
 		discount: {
 			type: DataTypes.INTEGER,
 		},
-		sent: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: false,
-		},
 		message: {
 			type: DataTypes.TEXT,
 		},
 		thread_id: {
 			type: DataTypes.ARRAY(DataTypes.INTEGER)
+		},
+		sent: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+		},
+		publishing_time: {
+			type: DataTypes.INTEGER,
+			defaultValue: 1
+		},
+		state: {
+			type: DataTypes.STRING,
+			defaultValue: 'PREMIUM'
+		},
+		market: {
+			type: DataTypes.STRING,
 		}
 	}, {
 		timestamps: false,

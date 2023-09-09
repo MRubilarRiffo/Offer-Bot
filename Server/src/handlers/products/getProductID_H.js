@@ -1,17 +1,15 @@
 const { Product } = require('../../db');
 
-const getProduct = async (id) => {
+const getProductID_H = async (id) => {
     try {
-        const product = await Product.findOne({
+        return await Product.findOne({
             where: {
                 product_id: id
             }
         });
-    
-        return product;
     } catch (error) {
         throw new Error('Error al obtener productos');
     };
 };
 
-module.exports = { getProduct };
+module.exports = { getProductID_H };

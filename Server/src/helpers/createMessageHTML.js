@@ -6,9 +6,9 @@ const formatPrice = (price) => {
     return formattedPrice;
 };
 
-const createMessageHTML = (name, store, normal_price, offer_price, discount, url, id, image, thread_id) => {
+const createMessageHTML = (name, store, normal_price, offer_price, discount, url, id, image, thread_id, market) => {
     const messageHTML = `<b>⚠️ | ${name.toUpperCase()}</b>\n\n<i>🏬 | Vendedor:</i> ${store.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' - ')}\n\n<i>✅ | ${discount}% de descuento</i>\n\n💰 | <code>${formatPrice(normal_price)} ➔ ${formatPrice(offer_price)}</code>\n\n<a href="${url}">👁️‍🗨️ | Ver Producto</a>`;
-
+    
     return {
         name: name,
         product_id: id,
@@ -19,7 +19,10 @@ const createMessageHTML = (name, store, normal_price, offer_price, discount, url
         discount: discount,
         image_url: image,
         message: messageHTML,
-        thread_id: thread_id
+        thread_id: thread_id,
+        publishing_time: 1,
+        sent: false,
+        market: market
     };
 };
 

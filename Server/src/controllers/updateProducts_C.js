@@ -5,7 +5,7 @@ const updateProduct_C = async (req, res, next) => {
         const sent = req.body;
         const { id } = req.params;
 
-        const result = await updateProduct_H(sent, id)
+        const result = await updateProduct_H(sent, { product_id: id })
 
         if (result.error) {
             res.status(400).send(result.error);

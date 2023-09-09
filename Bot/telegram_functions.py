@@ -1,6 +1,7 @@
 import httpx
 import asyncio
 import random
+import time
 from api_functions import get_api_data, update_product
 from log_functions import log_message
 from telegram import Bot
@@ -11,6 +12,7 @@ async def send_product_to_telegram(client, bot, product, CANAL_ID):
     image_url = product.get('image_url')
     message = product.get('message')
     thread_ids = product.get('thread_id', [])
+    state = product.get('state')
 
     max_retries = 3
 
@@ -18,12 +20,22 @@ async def send_product_to_telegram(client, bot, product, CANAL_ID):
         for attempt in range(1, max_retries + 1):
             try:
                 result = await bot.send_photo(
-                    chat_id=CANAL_ID, photo=image_url, caption=message, 
+                    chat_id=CANAL_ID[state], photo=image_url, caption=message, 
                     reply_to_message_id=thread_id, parse_mode='HTML'
                 )
+                
                 if result.message_id:
+                    publishing_time = int(time.time()) + (4 * 3600)
+
+                    props = {
+                        'sent': True,
+                        'publishing_time': publishing_time,
+                        'state': 'FREE',
+                        'thread_id': [18]
+                    }
+
                     log_message(f'El producto id: {product_id} se publicó correctamente')
-                    await update_product(client, product_id)
+                    await update_product(client, product_id, props)
                     break
             except BadRequest as e:
                 log_message(f'Error {attempt} al responder al mensaje {thread_id}: Hubo un error al enviar el mensaje al chat: {e}.')
@@ -70,6 +82,7 @@ async def send_data(TOKEN, sortOrder, fields, CANAL_ID, filters):
                             
                     await send_product_to_telegram(client, bot, product, CANAL_ID)
                 page += 1
+                await asyncio.sleep(1)
             else:
                 log_message(f'Error {count_error}: Hubo un error al obtener los datos de la API.')
                 if count_error < max_count_error:

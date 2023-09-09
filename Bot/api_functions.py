@@ -11,10 +11,10 @@ async def get_api_data(client, page, sortOrder, fields, filters):
         log_message(f'Error: {e}')
         return None
 
-async def update_product(client, id):
+async def update_product(client, id, props):
     api_url = f'http://localhost:3001/products/{id}'
     try:
-        response = await client.post(api_url, json={'sent': True})
+        response = await client.post(api_url, json=props)
         response.raise_for_status()
         return response.json()
     except httpx.HTTPError as e:

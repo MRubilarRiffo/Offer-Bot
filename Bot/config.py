@@ -11,9 +11,14 @@ TOKEN = [
     os.environ.get('TOKEN_5'),
     os.environ.get('TOKEN_6'),
     os.environ.get('TOKEN_7'),
+    os.environ.get('TOKEN_8'),
+    os.environ.get('TOKEN_9'),
 ]
 
-CANAL_ID = os.environ.get('CANAL_ID')
+CANAL_ID = {
+    'PREMIUM': os.environ.get('CANAL_PREMIUM_ID'),
+    'FREE': os.environ.get('CANAL_FREE_ID')
+}
 
 ASC = 'asc'
 DESC = 'desc'
@@ -29,14 +34,16 @@ DISCOUNT = 'discount'
 ID = 'product_id'
 MESSAGE = 'message'
 THREAD_ID = 'thread_id'
+PUBLISHING_TIME = 'publishing_time'
+STATE = 'state'
 
 name = ''
 store = ''
 sent = 'false'
-minDiscount = 30
+minDiscount = 10
 maxDiscount = 100
 
 sortOrder = ASC
 filters = f'minDiscount={minDiscount}&maxDiscount={maxDiscount}&name={name}&store={store}&sent={sent}'
 # fields = f'{NAME},{IMAGE_URL},{URL},{STORE},{NORMAL_PRICE},{OFFER_PRICE},{DISCOUNT},{ID},{MESSAGE}'
-fields = f'{ID},{IMAGE_URL},{DISCOUNT},{MESSAGE},{THREAD_ID}'
+fields = f'{ID},{IMAGE_URL},{DISCOUNT},{MESSAGE},{THREAD_ID},{PUBLISHING_TIME},{STATE}'

@@ -10,19 +10,17 @@ const getProducts_H = async (page, limit, filters, sortOrder, selectedFields) =>
         
         const order = sortOrder === 'desc' ? 'DESC' : 'ASC';
         
-        const allowedFields = ['name', 'product_id', 'offer_price', 'normal_price', 'url', 'store', 'discount', 'image_url', 'message', 'thread_id'];
+        const allowedFields = ['name', 'product_id', 'offer_price', 'normal_price', 'url', 'store', 'discount', 'image_url', 'message', 'thread_id', 'state'];
         
         let attributes = selectedFields && selectedFields.filter(field => allowedFields.includes(field));
         
-        const products = await Product.findAll({
+        return await Product.findAll({
             where: where,
             order: sortOrder === 'random' ? Sequelize.literal('random()') : [['id', order]],
             limit: limit,
             offset: offset,
             attributes: attributes
         });
-
-        return products;
     } catch (error) {
         throw new Error(`Error al obtener productos: ${error}`);
     };
