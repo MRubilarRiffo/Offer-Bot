@@ -13,6 +13,13 @@ TOKEN = [
     os.environ.get('TOKEN_7'),
     os.environ.get('TOKEN_8'),
     os.environ.get('TOKEN_9'),
+    os.environ.get('TOKEN_10'),
+    os.environ.get('TOKEN_11'),
+    os.environ.get('TOKEN_12'),
+    os.environ.get('TOKEN_13'),
+    os.environ.get('TOKEN_14'),
+    os.environ.get('TOKEN_15'),
+    os.environ.get('TOKEN_16'),
 ]
 
 CANAL_ID = {
@@ -45,5 +52,4 @@ maxDiscount = 100
 
 sortOrder = ASC
 filters = f'minDiscount={minDiscount}&maxDiscount={maxDiscount}&name={name}&store={store}&sent={sent}'
-# fields = f'{NAME},{IMAGE_URL},{URL},{STORE},{NORMAL_PRICE},{OFFER_PRICE},{DISCOUNT},{ID},{MESSAGE}'
-fields = f'{ID},{IMAGE_URL},{DISCOUNT},{MESSAGE},{THREAD_ID},{PUBLISHING_TIME},{STATE}'
+fields = f'{ID},{IMAGE_URL},{MESSAGE},{THREAD_ID},{STATE}'
