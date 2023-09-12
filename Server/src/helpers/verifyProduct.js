@@ -3,8 +3,9 @@ const { logMessage } = require("./logMessage");
 const { updateProduct_H } = require('../handlers/products/updateProducts_H');
 
 const verifyProduct = async () => {
-    logMessage('Verificando productos...')
     try {
+        logMessage('Verificando productos...')
+        
         const currentDateSeconds = Math.floor(Date.now() / 1000);
 
         const props = {

@@ -13,9 +13,14 @@ const PORT = 3001;
 const executeTask = async () => {
     try {
         // await getJumbo();
-        await getKnasta();
         // await getEasy();
+        // await getKnasta();
         // await getUnimarc();
+        await Promise.all([
+            getKnasta(),
+            getUnimarc()
+        ]);
+        
         logMessage('Tarea programada ejecutada');
     } catch (error) {
         logMessage(`Error al ejecutar la tarea programada: ${error}`);
@@ -24,7 +29,7 @@ const executeTask = async () => {
     };
 };
 
-conn.sync({ force: false })
+conn.sync({ force: true })
     .then(() => {
         server.listen(PORT, () => logMessage(`Server listening on port ${PORT}`));
     })

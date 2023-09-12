@@ -20,6 +20,7 @@ TOKEN = [
     os.environ.get('TOKEN_14'),
     os.environ.get('TOKEN_15'),
     os.environ.get('TOKEN_16'),
+    os.environ.get('TOKEN_17'),
 ]
 
 CANAL_ID = {

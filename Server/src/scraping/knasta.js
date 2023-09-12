@@ -6,28 +6,28 @@ const { createMessageHTML } = require('../helpers/createMessageHTML');
 const { threadSelector } = require('../helpers/threadSelector');
 const { getTotalProducts } = require('../handlers/products/getTotalProducts_H');
 
+const SLEEP_DURATION = 10;
+const BASE_URL = 'https://knasta.cl';
+const MARKET = 'Knasta'
+
 const getKnasta = async () => {
     try {
-        const SLEEP_DURATION = 10;
-        const BASE_URL = 'https://knasta.cl';
-        const MARKET = 'Knasta'
-
         const countProducts = await getTotalProducts({ market: MARKET });
         
         let total_pages_ = 1;
         let page = 1;
         while (page <= total_pages_) {
-            logMessage(`Kanasta | Page: ${page} de ${total_pages_}`);
+            logMessage(`Kanasta | Page: ${page} of ${total_pages_}`);
 
             const api = `${BASE_URL}/_next/data/8223c0c755711a83aabf91debc5a3fba60bf78b3/es/results.json?knastaday=1&d=-0&page=${page}`;
             
             const data = await requestsAPI(api);
 
-            const { pageProps: { initialData: { total_pages, products } = {} } = {} } = data || {};
+            const { pageProps: { initialData: { total_pages, products, count } = {} } = {} } = data || {};
 
             total_pages_ = total_pages;
 
-            if (countProducts === total_pages_) break;
+            if (countProducts === count) break;
 
             if (products.length) {
                 for (let product of products) {
@@ -35,7 +35,7 @@ const getKnasta = async () => {
 
                     if (!id || !product.url) continue;
 
-                    const thread_id = threadSelector(product.percent * -1, product.retail == ['Lider_supermercado'] && true)
+                    const thread_id = threadSelector(product.percent * -1, product.retail[0] == 'Lider_supermercado' && true)
 
                     const props = createMessageHTML(
                         product.title,

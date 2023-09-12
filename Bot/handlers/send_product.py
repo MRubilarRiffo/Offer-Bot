@@ -4,6 +4,9 @@ from services.update_product import update_product
 from utilities.log_message import log_message
 from telegram.error import BadRequest, TimedOut
 
+PREMIUM = 'PREMIUM'
+FREE = 'FREE'
+
 async def send_product(client, bot, product, CANAL_ID):
     product_id = product.get('product_id', None)
     image_url = product.get('image_url')
@@ -21,18 +24,20 @@ async def send_product(client, bot, product, CANAL_ID):
                     reply_to_message_id=thread_id, parse_mode='HTML'
                 )
 
-                if result.message_id and state == 'PREMIUM':
-                    publishing_time = int(time.time()) + (4 * 3600)
-
-                    props = {
-                        'sent': True,
-                        'publishing_time': publishing_time,
-                        'state': 'FREE',
-                        'thread_id': [18]
-                    }
-
+                if result.message_id:
                     log_message(f'El producto id: {product_id} se publicó correctamente')
-                    await update_product(client, product_id, props)
+                    if state == PREMIUM:
+                        await update_product(client, product_id, {
+                            'sent': True,
+                            'publishing_time': int(time.time()) + (4 * 60 * 60),
+                            'state': FREE,
+                            'thread_id': [18]
+                        })
+                    elif state == FREE:
+                        await update_product(client, product_id, {
+                            'sent': False,
+                            'publishing_time': 1
+                        })
                     break
             except (BadRequest, TimedOut) as e:
                 error_type = "BadRequest" if isinstance(e, BadRequest) else "TimedOut"
