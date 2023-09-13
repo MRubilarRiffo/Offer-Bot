@@ -28,8 +28,8 @@ const loadUserAgent = () => {
 };
 
 const getRandomUserAgent = (userAgent) => {
-    const userAgentDetails = userAgent[Math.floor(Math.random() * userAgent.length)];
-    return userAgentDetails.trim();
+    const userAgentDetails = userAgent[Math.floor(Math.random() * userAgent.length)].trim();
+    return userAgentDetails;
 };
 
 const requestsAPI = async (url, headers = {}, retryCount = 3) => {
@@ -49,7 +49,7 @@ const requestsAPI = async (url, headers = {}, retryCount = 3) => {
             return response.data;
         } catch (error) {
             if (i === retryCount - 1) {
-                logMessage(`Error: ${error}`);
+                logMessage(`Error: ${error}\nProxy: ${proxyUrl}`);
             }
             console.warn(`Attempt ${i + 1} failed. Retrying...`);
         };

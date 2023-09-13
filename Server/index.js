@@ -7,6 +7,7 @@ const { logMessage } = require('./src/helpers/logMessage');
 const { getUnimarc } = require('./src/scraping/Unimarc');
 const { getEasy } = require('./src/scraping/Easy');
 const { verifyProduct } = require('./src/helpers/verifyProduct');
+const { getCocaCola } = require('./src/scraping/Coca Cola');
 
 const PORT = 3001;
 
@@ -16,10 +17,11 @@ const executeTask = async () => {
         // await getEasy();
         // await getKnasta();
         // await getUnimarc();
-        await Promise.all([
-            getKnasta(),
-            getUnimarc()
-        ]);
+        await getCocaCola()
+        // await Promise.all([
+        //     getKnasta(),
+        //     getUnimarc()
+        // ]);
         
         logMessage('Tarea programada ejecutada');
     } catch (error) {
@@ -29,7 +31,7 @@ const executeTask = async () => {
     };
 };
 
-conn.sync({ force: true })
+conn.sync({ force: false })
     .then(() => {
         server.listen(PORT, () => logMessage(`Server listening on port ${PORT}`));
     })

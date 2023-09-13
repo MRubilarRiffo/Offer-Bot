@@ -21,12 +21,16 @@ TOKEN = [
     os.environ.get('TOKEN_15'),
     os.environ.get('TOKEN_16'),
     os.environ.get('TOKEN_17'),
+    os.environ.get('TOKEN_18'),
 ]
 
 CANAL_ID = {
     'PREMIUM': os.environ.get('CANAL_PREMIUM_ID'),
     'FREE': os.environ.get('CANAL_FREE_ID')
 }
+
+CANAL_FREE_ID = os.environ.get('CANAL_FREE_ID')
+CANAL_PREMIUM_ID = os.environ.get('CANAL_PREMIUM_ID')
 
 ASC = 'asc'
 DESC = 'desc'

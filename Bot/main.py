@@ -1,5 +1,5 @@
 import asyncio
-from config.settings import TOKEN, CANAL_ID, sortOrder, fields, filters
+from config.settings import TOKEN, CANAL_ID, sortOrder, fields, filters, CANAL_PREMIUM_ID, CANAL_FREE_ID
 from handlers.send_data import send_data
 from utilities.log_message import log_message
 
