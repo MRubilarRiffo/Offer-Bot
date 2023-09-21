@@ -2,7 +2,6 @@ const { logMessage } = require("../helpers/logMessage");
 const { requestsAPI } = require("../helpers/requestsAPI");
 const { existingProduct_ } = require("../helpers/existingProduct");
 const { sleep } = require("../helpers/sleep");
-const { threadSelector } = require("../helpers/threadSelector");
 const { createMessageHTML } = require("../helpers/createMessageHTML");
 const cheerio = require('cheerio');
 const { getTotalProducts } = require("../handlers/products/getTotalProducts_H");
@@ -80,8 +79,6 @@ const getUnimarc = async () => {
                         
                         if (!id || !product.slug) continue;
 
-                        const thread_id = threadSelector(null, true)
-
                         const props = createMessageHTML(
                             product.name,
                             ['Unimarc'],
@@ -91,7 +88,6 @@ const getUnimarc = async () => {
                             `https://www.unimarc.cl/product${product.slug}`.slice(0, -2),
                             id,
                             product.images[0],
-                            thread_id,
                             MARKET
                         );
     

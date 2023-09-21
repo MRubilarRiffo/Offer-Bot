@@ -1,5 +1,5 @@
 import asyncio
-from config.settings import TOKEN, CANAL_ID, sortOrder, fields, filters, CANAL_PREMIUM_ID, CANAL_FREE_ID
+from config.settings import sortOrder, fields, filters_premium, filters_free, CANAL_PREMIUM_ID, CANAL_FREE_ID, TOKEN_PREMIUM
 from handlers.send_data import send_data
 from utilities.log_message import log_message
 
@@ -7,7 +7,12 @@ SLEEP = 5 # minutes
 
 async def check_api_every_minute():
     while True:
-        await send_data(TOKEN, sortOrder, fields, CANAL_ID, filters)
+        task_premium = asyncio.create_task(send_data(TOKEN_PREMIUM, sortOrder, fields, CANAL_PREMIUM_ID, filters_premium))
+        # task_free = asyncio.create_task(send_data(TOKEN_FREE, sortOrder, fields, CANAL_FREE_ID, filters))
+
+        await task_premium
+        # await task_free
+
         log_message('Esperando...')
         await asyncio.sleep(SLEEP * 60)
 

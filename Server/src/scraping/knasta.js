@@ -3,7 +3,6 @@ const { requestsAPI } = require('../helpers/requestsAPI');
 const { logMessage } = require('../helpers/logMessage');
 const { existingProduct_ } = require('../helpers/existingProduct');
 const { createMessageHTML } = require('../helpers/createMessageHTML');
-const { threadSelector } = require('../helpers/threadSelector');
 const { getTotalProducts } = require('../handlers/products/getTotalProducts_H');
 
 const SLEEP_DURATION = 10;
@@ -35,8 +34,6 @@ const getKnasta = async () => {
 
                     if (!id || !product.url) continue;
 
-                    const thread_id = threadSelector(product.percent * -1, product.retail[0] == 'Lider_supermercado' && true)
-
                     const props = createMessageHTML(
                         product.title,
                         product.retail,
@@ -46,7 +43,6 @@ const getKnasta = async () => {
                         product.url,
                         id,
                         product.image,
-                        thread_id,
                         MARKET
                     );
 

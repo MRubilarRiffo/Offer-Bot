@@ -15,6 +15,10 @@ const whereClause = (filters) => {
         };
     };
 
+    if (filters.state) {
+        whereClause.state = filters.state;
+    };
+
     if (filters.minDiscount || filters.maxDiscount) {
         whereClause.discount = {};
     

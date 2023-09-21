@@ -1,16 +1,16 @@
+const { createMessageHTML } = require("../helpers/createMessageHTML");
 const { existingProduct_ } = require("../helpers/existingProduct");
 const { logMessage } = require("../helpers/logMessage");
 const { requestsAPI } = require("../helpers/requestsAPI");
-const { sleep } = require("../helpers/sleep");
 
+const HEADERS = { Apikey: 'WlVnnB7c1BblmgUPOfg' };
+
+const PRODUCT_X_PAGE = 40;
+const BASE_URL = 'https://sm-web-api.ecomm.cencosud.com';
+const MARKET = 'Jumbo';
 
 const getJumbo = async () => {
     try {
-        const HEADERS = { Apikey: 'WlVnnB7c1BblmgUPOfg' };
-        
-        const PRODUCT_X_PAGE = 40;
-        const BASE_URL = 'https://sm-web-api.ecomm.cencosud.com';
-        const SLEEP_DURATION = 10;
         
         const categories = [
             "lacteos",
@@ -34,8 +34,9 @@ const getJumbo = async () => {
                 const data = await requestsAPI(api, HEADERS);
 
                 const products = data?.products;
+                const totalProducts = data?.recordsFiltered;
 
-                total_pages = Math.ceil(data?.recordsFiltered / PRODUCT_X_PAGE);
+                total_pages = Math.ceil(totalProducts / PRODUCT_X_PAGE);
 
                 if (products.length) {
                     for (let product of products) {
@@ -43,27 +44,26 @@ const getJumbo = async () => {
 
                         if (!id) continue;
 
-                        const props = {
-                            name: product.productName,
-                            product_id: id,
-                            offer_price: product.items[0].sellers[0].commertialOffer.Price,
-                            normal_price: product.items[0].sellers[0].commertialOffer.ListPrice,
-                            url: `https://www.jumbo.cl/${product.linkText}/p`,
-                            store: [product.items[0].sellers[0].sellerName],
-                            discount: Math.round(100-(product.items[0].sellers[0].commertialOffer.Price * 100 / product.items[0].sellers[0].commertialOffer.ListPrice)),
-                            image_url: product.items[0].images[0].imageUrl
-                        };
+                        const props = createMessageHTML(
+                            product.productName,
+                            [MARKET],
+                            product.items[0].sellers[0].commertialOffer.Price,
+                            product.items[0].sellers[0].commertialOffer.ListPrice,
+                            Math.round(100-(product.items[0].sellers[0].commertialOffer.Price * 100 / product.items[0].sellers[0].commertialOffer.ListPrice)),
+                            `https://www.jumbo.cl/${product.linkText}/p`,
+                            id,
+                            product.items[0].images[0].imageUrl,
+                            MARKET
+                        );
 
-                        existingProduct_(props, id);
+                        await existingProduct_(props, id);
                     };
                 };
                 page++;
-
-                await sleep(SLEEP_DURATION);
             };
         };
     } catch (error) {
-        console.error(`Error: ${error}`);
+        logMessage(`Error: ${error}`);
     };
 };
 

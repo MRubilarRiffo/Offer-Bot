@@ -60,8 +60,6 @@ const getCocaCola = async () => {
 
                     if (!id ) continue;
 
-                    const thread_id = threadSelector(null, true);
-
                     const props = createMessageHTML(
                         product.productName,
                         [MARKET],
@@ -71,7 +69,6 @@ const getCocaCola = async () => {
                         `${BASE_URL}${product.link}`,
                         id,
                         product.items[0].images[0].imageUrl,
-                        thread_id,
                         MARKET
                     );
 

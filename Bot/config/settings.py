@@ -3,34 +3,24 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-TOKEN = [
-    os.environ.get('TOKEN_1'),
-    os.environ.get('TOKEN_2'),
-    os.environ.get('TOKEN_3'),
-    os.environ.get('TOKEN_4'),
-    os.environ.get('TOKEN_5'),
-    os.environ.get('TOKEN_6'),
-    os.environ.get('TOKEN_7'),
-    os.environ.get('TOKEN_8'),
-    os.environ.get('TOKEN_9'),
-    os.environ.get('TOKEN_10'),
-    os.environ.get('TOKEN_11'),
-    os.environ.get('TOKEN_12'),
-    os.environ.get('TOKEN_13'),
-    os.environ.get('TOKEN_14'),
-    os.environ.get('TOKEN_15'),
-    os.environ.get('TOKEN_16'),
-    os.environ.get('TOKEN_17'),
-    os.environ.get('TOKEN_18'),
-]
-
-CANAL_ID = {
-    'PREMIUM': os.environ.get('CANAL_PREMIUM_ID'),
-    'FREE': os.environ.get('CANAL_FREE_ID')
-}
+TOKEN_PREMIUM = os.environ.get('TOKEN_PREMIUM').replace('\n', '').replace(' ', '').split(',')
+# TOKEN_FREE = os.environ.get('TOKEN_FREE').replace('\n', '').split(',')
 
 CANAL_FREE_ID = os.environ.get('CANAL_FREE_ID')
+
+THREAD_ID_10_DCTO_FREE = os.environ.get('THREAD_ID_10_DCTO_FREE')
+THREAD_ID_30_DCTO_FREE = os.environ.get('THREAD_ID_30_DCTO_FREE')
+
 CANAL_PREMIUM_ID = os.environ.get('CANAL_PREMIUM_ID')
+
+THREAD_ID_SUPERMARKET_10_DCTO_PREMIUM = os.environ.get('THREAD_ID_SUPERMARKET_10_DCTO_PREMIUM')
+THREAD_ID_SUPERMARKET_30_DCTO_PREMIUM = os.environ.get('THREAD_ID_SUPERMARKET_30_DCTO_PREMIUM')
+THREAD_ID_SUPERMARKET_50_DCTO_PREMIUM = os.environ.get('THREAD_ID_SUPERMARKET_50_DCTO_PREMIUM')
+
+THREAD_ID_10_DCTO_PREMIUM = os.environ.get('THREAD_ID_10_DCTO_PREMIUM')
+THREAD_ID_30_DCTO_PREMIUM = os.environ.get('THREAD_ID_30_DCTO_PREMIUM')
+THREAD_ID_60_DCTO_PREMIUM = os.environ.get('THREAD_ID_60_DCTO_PREMIUM')
+THREAD_ID_80_DCTO_PREMIUM = os.environ.get('THREAD_ID_80_DCTO_PREMIUM')
 
 ASC = 'asc'
 DESC = 'desc'
@@ -45,16 +35,18 @@ NORMAL_PRICE = 'normal_price'
 DISCOUNT = 'discount'
 ID = 'product_id'
 MESSAGE = 'message'
-THREAD_ID = 'thread_id'
 PUBLISHING_TIME = 'publishing_time'
 STATE = 'state'
 
 name = ''
 store = ''
 sent = 'false'
+state_premium = 'PREMIUM'
+state_free = 'FREE'
 minDiscount = 10
 maxDiscount = 100
 
 sortOrder = ASC
-filters = f'minDiscount={minDiscount}&maxDiscount={maxDiscount}&name={name}&store={store}&sent={sent}'
-fields = f'{ID},{IMAGE_URL},{MESSAGE},{THREAD_ID},{STATE}'
+filters_premium = f'minDiscount={minDiscount}&maxDiscount={maxDiscount}&name={name}&store={store}&sent={sent}&state={state_premium}'
+filters_free = f'minDiscount={minDiscount}&maxDiscount={maxDiscount}&name={name}&store={store}&sent={sent}&state={state_free}'
+fields = f'{ID},{IMAGE_URL},{MESSAGE},{STATE},{STORE},{DISCOUNT}'

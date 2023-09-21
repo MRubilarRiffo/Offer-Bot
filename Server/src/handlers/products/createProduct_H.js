@@ -17,7 +17,6 @@ const createProduct_H = async (product) => {
             image_url: product.image_url,
             sent: false,
             message: product.message,
-            thread_id: product.thread_id,
             market: product.market
         });
     } catch (error) {
