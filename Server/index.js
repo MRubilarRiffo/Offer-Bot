@@ -5,17 +5,19 @@ const { getKnasta } = require('./src/scraping/knasta');
 const { getJumbo } = require('./src/scraping/Jumbo');
 const { logMessage } = require('./src/helpers/logMessage');
 const { getUnimarc } = require('./src/scraping/Unimarc');
-const { getEasy } = require('./src/scraping/Easy');
+// const { getEasy } = require('./src/scraping/Easy');
 const { verifyProduct } = require('./src/helpers/verifyProduct');
-const { getCocaCola } = require('./src/scraping/Coca Cola');
+// const { getCocaCola } = require('./src/scraping/Coca Cola');
 
 const PORT = 3001;
+
+const MINUTES = 20
 
 const executeTask = async () => {
     try {
         // await getEasy();
-        // await getCocaCola()
         await Promise.all([
+            getCocaCola(),
             getKnasta(),
             getUnimarc(),
             getJumbo()
@@ -25,16 +27,16 @@ const executeTask = async () => {
     } catch (error) {
         logMessage(`Error al ejecutar la tarea programada: ${error}`);
     } finally {
-        setTimeout(executeTask, 10 * 60 * 1000);
+        setTimeout(executeTask, MINUTES * 60 * 1000);
     };
 };
 
-conn.sync({ force: true })
+conn.sync({ force: false })
     .then(() => {
         server.listen(PORT, () => logMessage(`Server listening on port ${PORT}`));
     })
     .then(() => {
-        executeTask();
+        // executeTask();
     })
     .then(() => {
         cron.schedule('*/10 * * * *', verifyProduct);

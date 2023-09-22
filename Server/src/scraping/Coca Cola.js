@@ -2,7 +2,6 @@ const { logMessage } = require("../helpers/logMessage");
 const { requestsAPI } = require("../helpers/requestsAPI");
 const { existingProduct_ } = require("../helpers/existingProduct");
 const { sleep } = require("../helpers/sleep");
-const { threadSelector } = require("../helpers/threadSelector");
 const { createMessageHTML } = require("../helpers/createMessageHTML");
 const { getTotalProducts } = require("../handlers/products/getTotalProducts_H");
 
@@ -63,8 +62,8 @@ const getCocaCola = async () => {
                     const props = createMessageHTML(
                         product.productName,
                         [MARKET],
-                        product.items[0].sellers[0].commertialOffer.Price,
                         product.items[0].sellers[0].commertialOffer.ListPrice,
+                        product.items[0].sellers[0].commertialOffer.Price,
                         Math.round(100 - (product.items[0].sellers[0].commertialOffer.Price * 100 / product.items[0].sellers[0].commertialOffer.ListPrice)),
                         `${BASE_URL}${product.link}`,
                         id,

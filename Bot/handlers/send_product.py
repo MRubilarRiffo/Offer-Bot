@@ -37,6 +37,8 @@ async def send_product(client, bot, product, CANAL_ID):
 
     photo = await fetch_image(image_url)
 
+    print(thread_id)
+
     max_retries = 3
 
     for attempt in range(1, max_retries + 1):
