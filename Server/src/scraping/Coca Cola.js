@@ -52,13 +52,12 @@ const getCocaCola = async () => {
             const totalProducts = data?.data?.productSearch?.recordsFiltered;
 
             totalPages = Math.ceil(totalProducts / PRODUCT_X_PAGE);
-
+            
             if (products.length) {
                 for (let product of products) {
                     const id = product.productId ? `Coca-Cola-${product.productId}` : null;
-
+                    
                     if (!id ) continue;
-
                     const props = createMessageHTML(
                         product.productName,
                         [MARKET],
@@ -70,7 +69,7 @@ const getCocaCola = async () => {
                         product.items[0].images[0].imageUrl,
                         MARKET
                     );
-
+                        
                     await existingProduct_(props, id);
                 };
             };

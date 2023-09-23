@@ -6,24 +6,21 @@ from utilities.threadSelector import threadSelector
 from telegram.error import BadRequest, TimedOut
 import httpx
 import io
-from telegram import InputFile
 
 PREMIUM = 'PREMIUM'
 FREE = 'FREE'
 
-async def fetch_image(url):
-    async with httpx.AsyncClient() as client:
-        response = await client.get(url)
+async def fetch_image(client, url):
+    response = await client.get(url)
 
-        if response.status_code == 200:
+    if response.status_code == 200:
+        photo = io.BytesIO(response.content)
+        photo.name = "image.jpg"
 
-            photo = io.BytesIO(response.content)
-            photo.name = "image.jpg"
-
-            return photo
-        else:
-            log_message(f"No se pudo descargar la imagen. Código de estado: {response.status_code}. Razón: {response.reason}")
-            return None
+        return photo
+    else:
+        log_message(f"No se pudo descargar la imagen. Código de estado: {response.status_code}.")
+        return None
 
 async def send_product(client, bot, product, CANAL_ID):
     product_id = product.get('product_id', None)
@@ -35,9 +32,11 @@ async def send_product(client, bot, product, CANAL_ID):
 
     thread_id = threadSelector(discount, store, state)
 
-    photo = await fetch_image(image_url)
+    photo = await fetch_image(client, image_url)
 
-    print(thread_id)
+    if (not photo):
+        log_message(f'No se envió el producto: {product_id}')
+        return
 
     max_retries = 3
 

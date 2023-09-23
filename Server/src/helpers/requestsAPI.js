@@ -49,7 +49,7 @@ const requestsAPI = async (url, headers = {}, retryCount = 3) => {
             return response.data;
         } catch (error) {
             if (i === retryCount - 1) {
-                logMessage(`Error: ${error}\nProxy: ${proxyUrl}`);
+                logMessage(`Error: ${error}`);
             }
             console.warn(`Attempt ${i + 1} failed. Retrying...`);
         };

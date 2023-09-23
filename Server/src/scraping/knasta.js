@@ -1,11 +1,9 @@
-const { sleep } = require('../helpers/sleep');
 const { requestsAPI } = require('../helpers/requestsAPI');
 const { logMessage } = require('../helpers/logMessage');
 const { existingProduct_ } = require('../helpers/existingProduct');
 const { createMessageHTML } = require('../helpers/createMessageHTML');
 const { getTotalProducts } = require('../handlers/products/getTotalProducts_H');
 
-const SLEEP_DURATION = 10;
 const BASE_URL = 'https://knasta.cl';
 const MARKET = 'Knasta'
 
@@ -49,11 +47,8 @@ const getKnasta = async () => {
                     await existingProduct_(props, id);
                 };
             };
-            
             page++;
-
-            await sleep(SLEEP_DURATION);
-        }
+        };
     } catch (error) {
         logMessage(`Error: ${error}`);
     };

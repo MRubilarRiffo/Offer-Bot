@@ -1,14 +1,12 @@
 const { logMessage } = require("../helpers/logMessage");
 const { requestsAPI } = require("../helpers/requestsAPI");
 const { existingProduct_ } = require("../helpers/existingProduct");
-const { sleep } = require("../helpers/sleep");
 const { createMessageHTML } = require("../helpers/createMessageHTML");
 const cheerio = require('cheerio');
 const { getTotalProducts } = require("../handlers/products/getTotalProducts_H");
 
-const BASE_URL = 'https://www.unimarc.cl'
+const BASE_URL = 'https://www.unimarc.cl';
 const PRODUCT_X_PAGE = 50;
-const SLEEP_DURATION = 10;
 const MARKET = 'Unimarc';
 
 const CATEGORIES = [
@@ -95,8 +93,6 @@ const getUnimarc = async () => {
                     };
                 };
                 page++;
-
-                await sleep(SLEEP_DURATION);
             };
         };
     } catch (error) {
