@@ -22,6 +22,9 @@ async def send_data(TOKEN, sortOrder, fields, CANAL_ID, filters):
             total_page = api_data.get('metadata', None).get('totalPages', None)
             products = api_data.get('data', None)
 
+            if (not total_page or not products):
+                break
+
             for product in products:
                 max_retries = 3
 
