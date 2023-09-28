@@ -4,12 +4,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 TOKEN_PREMIUM = os.environ.get('TOKEN_PREMIUM').replace('\n', '').replace(' ', '').split(',')
-# TOKEN_FREE = os.environ.get('TOKEN_FREE').replace('\n', '').split(',')
+TOKEN_FREE = os.environ.get('TOKEN_FREE').replace('\n', '').replace(' ', '').split(',')
 
 CANAL_FREE_ID = os.environ.get('CANAL_FREE_ID')
 
-THREAD_ID_10_DCTO_FREE = os.environ.get('THREAD_ID_10_DCTO_FREE')
+THREAD_ID_20_DCTO_FREE = os.environ.get('THREAD_ID_20_DCTO_FREE')
 THREAD_ID_30_DCTO_FREE = os.environ.get('THREAD_ID_30_DCTO_FREE')
+
+THREAD_ID_SUPERMARKET_20_DCTO_FREE = os.environ.get('THREAD_ID_SUPERMARKET_20_DCTO_FREE')
 
 CANAL_PREMIUM_ID = os.environ.get('CANAL_PREMIUM_ID')
 
@@ -43,10 +45,12 @@ store = ''
 sent = 'false'
 state_premium = 'PREMIUM'
 state_free = 'FREE'
-minDiscount = 20
-maxDiscount = 100
+minDiscountPREMIUM = 20
+maxDiscountPREMIUM = 100
+minDiscountFREE = 20
+maxDiscountFREE = 49
 
 sortOrder = ASC
-filters_premium = f'minDiscount={minDiscount}&maxDiscount={maxDiscount}&name={name}&store={store}&sent={sent}&state={state_premium}'
-filters_free = f'minDiscount={minDiscount}&maxDiscount={maxDiscount}&name={name}&store={store}&sent={sent}&state={state_free}'
+filters_premium = f'minDiscount={minDiscountPREMIUM}&maxDiscount={maxDiscountPREMIUM}&name={name}&store={store}&sent={sent}&state={state_premium}'
+filters_free = f'minDiscount={minDiscountFREE}&maxDiscount={maxDiscountFREE}&name={name}&store={store}&sent={sent}&state={state_free}'
 fields = f'{ID},{IMAGE_URL},{MESSAGE},{STATE},{STORE},{DISCOUNT}'

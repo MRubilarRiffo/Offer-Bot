@@ -1,12 +1,13 @@
 const server = require('./src/server');
-const { conn } = require('./src/db');
 const cron = require('node-cron');
+const { conn } = require('./src/db');
+
 const { getKnasta } = require('./src/scraping/knasta');
 const { getJumbo } = require('./src/scraping/Jumbo');
 const { logMessage } = require('./src/helpers/logMessage');
 const { getUnimarc } = require('./src/scraping/Unimarc');
 const { verifyProduct } = require('./src/helpers/verifyProduct');
-const { getCocaCola } = require('./src/scraping/Coca Cola');
+// const { getCocaCola } = require('./src/scraping/Coca Cola');
 const { adidas } = require('./src/scraping/Adidas');
 // const { getEasy } = require('./src/scraping/Easy');
 
@@ -39,7 +40,7 @@ conn.sync({ force: false })
         server.listen(PORT, () => logMessage(`Server listening on port ${PORT}`));
     })
     .then(() => {
-        executeTask();
+        // executeTask();
     })
     .then(() => {
         cron.schedule('*/10 * * * *', verifyProduct);

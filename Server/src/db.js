@@ -3,9 +3,14 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const { config } = require('./config/config');
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/offer-bot`, {
+const db_user = decodeURIComponent(config.db_user);
+const db_password = decodeURIComponent(config.db_password);
+
+const URI = `postgres://${db_user}:${db_password}@${config.db_host}/offer-bot`;
+
+const sequelize = new Sequelize(URI, {
   logging: false,
   native: false
 });

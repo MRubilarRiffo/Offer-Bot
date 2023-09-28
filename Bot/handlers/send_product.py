@@ -1,7 +1,6 @@
 import io
 import time
 import asyncio
-
 from services.update_product import update_product
 from utilities.log_message import log_message
 from utilities.threadSelector import threadSelector
@@ -84,6 +83,5 @@ async def send_product(client, bot, product, CANAL_ID):
         if attempt < max_retries:
             log_message('Reintentando en 5 segundos...')
             await asyncio.sleep(5)
-            
-    log_message("Se han agotado los intentos para descargar la imagen.")
-    return None
+        else:
+            log_message("Se han agotado los intentos para descargar la imagen.")
