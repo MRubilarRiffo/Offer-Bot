@@ -40,7 +40,7 @@ conn.sync({ force: false })
         server.listen(PORT, () => logMessage(`Server listening on port ${PORT}`));
     })
     .then(() => {
-        executeTask();
+        // executeTask();
     })
     .then(() => {
         cron.schedule('*/10 * * * *', verifyProduct);
