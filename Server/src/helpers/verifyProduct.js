@@ -16,6 +16,8 @@ const verifyProduct = async () => {
             publishing_time: {
                 [Op.lt]: currentDateSeconds,
             },
+            sent: true,
+            state: 'FREE'
         };
 
         await updateProduct_H(props, where);

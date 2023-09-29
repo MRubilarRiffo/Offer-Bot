@@ -8,6 +8,7 @@ from telegram.error import BadRequest, TimedOut
 
 PREMIUM = 'PREMIUM'
 FREE = 'FREE'
+OK = 'OK'
 
 async def fetch_image(client, url):
     max_retries = 3
@@ -65,7 +66,7 @@ async def send_product(client, bot, product, CANAL_ID):
             props = {
                 'sent': True,
                 'publishing_time': int(time.time()) + (4 * 60 * 60) if state == PREMIUM else 1,
-                'state': FREE,
+                'state': FREE if state == PREMIUM else OK
             }
 
             if result.message_id:
