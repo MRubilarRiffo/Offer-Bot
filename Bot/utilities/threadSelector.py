@@ -1,7 +1,12 @@
 from config.settings import (
     THREAD_ID_SUPERMARKET_20_DCTO_FREE,
+    THREAD_ID_SUPERMARKET_50_DCTO_FREE,
     THREAD_ID_20_DCTO_FREE,
     THREAD_ID_30_DCTO_FREE,
+    THREAD_ID_40_DCTO_FREE,
+    THREAD_ID_50_DCTO_FREE,
+    THREAD_ID_60_DCTO_FREE,
+    THREAD_ID_70_DCTO_FREE,
     THREAD_ID_SUPERMARKET_20_DCTO_PREMIUM,
     THREAD_ID_SUPERMARKET_30_DCTO_PREMIUM,
     THREAD_ID_SUPERMARKET_50_DCTO_PREMIUM,
@@ -37,7 +42,18 @@ def threadSelector(discount, store, state):
             return THREAD_ID_20_DCTO_PREMIUM
     elif state == FREE:
         if store[0] == UNIMARC or store[0] == LIDER_MARKET or store[0] == JUMBO:
-            return THREAD_ID_SUPERMARKET_20_DCTO_FREE
+            if discount >= 50:
+                return THREAD_ID_SUPERMARKET_50_DCTO_FREE
+            elif discount >= 20:
+                return THREAD_ID_SUPERMARKET_20_DCTO_FREE
+        elif discount >= 70:
+            return THREAD_ID_70_DCTO_FREE
+        elif discount >= 60:
+            return THREAD_ID_60_DCTO_FREE
+        elif discount >= 50:
+            return THREAD_ID_50_DCTO_FREE
+        elif discount >= 40:
+            return THREAD_ID_40_DCTO_FREE
         elif discount >= 30:
             return THREAD_ID_30_DCTO_FREE
         elif discount >= 20:

@@ -1,5 +1,4 @@
 import io
-import time
 import asyncio
 from services.update_product import update_product
 from utilities.log_message import log_message
@@ -8,7 +7,6 @@ from telegram.error import BadRequest, TimedOut
 
 PREMIUM = 'PREMIUM'
 FREE = 'FREE'
-OK = 'OK'
 
 async def fetch_image(client, url):
     max_retries = 3
