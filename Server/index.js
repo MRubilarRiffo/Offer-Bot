@@ -1,5 +1,4 @@
 const server = require('./src/server');
-const cron = require('node-cron');
 const { conn } = require('./src/db');
 
 const { getKnasta } = require('./src/scraping/knasta');
@@ -34,11 +33,11 @@ const executeTask = async () => {
     };
 };
 
-conn.sync({ force: false })
+conn.sync({ force: true })
     .then(() => {
         server.listen(PORT, () => logMessage(`Server listening on port ${PORT}`));
     })
     .then(() => {
-        // executeTask();
+        executeTask();
     })
     .catch(error => logMessage(error));
