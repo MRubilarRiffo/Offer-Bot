@@ -12,8 +12,9 @@ const getProducts_C = async (req, res, next) => {
             discount: req.query.discount,
             minDiscount: req.query.minDiscount,
             maxDiscount: req.query.maxDiscount,
-            sent: req.query.sent,
-            state: req.query.state
+            sent_to_group_PREMIUM: req.query.sentPREMIUM,
+            sent_to_group_FREE: req.query.sentFREE,
+            date: req.query.date
         };
 
         const sortOrder = req.query.sortOrder || 'asc';

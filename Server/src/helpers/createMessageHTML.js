@@ -19,8 +19,6 @@ const createMessageHTML = (name, store, normal_price, offer_price, discount, url
         discount: discount,
         image_url: image,
         message: messageHTML,
-        publishing_time: 1,
-        sent: false,
         market: market
     };
 };

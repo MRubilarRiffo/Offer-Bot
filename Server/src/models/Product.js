@@ -35,20 +35,24 @@ module.exports = (sequelize) => {
 		message: {
 			type: DataTypes.TEXT,
 		},
-		sent: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: false,
-		},
-		publishing_time: {
-			type: DataTypes.INTEGER,
-			defaultValue: 1
-		},
-		state: {
-			type: DataTypes.STRING,
-			defaultValue: 'PREMIUM'
-		},
 		market: {
 			type: DataTypes.STRING,
+		},
+		sent_to_group_PREMIUM: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false
+		},
+		sent_to_group_FREE: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false
+		},
+		group_PREMIUM_send_time: {
+			type: DataTypes.INTEGER,
+			defaultValue: Math.floor(Date.now() / 1000)
+		},
+		group_FREE_send_time: {
+			type: DataTypes.INTEGER,
+			defaultValue: Math.floor(Date.now() / 1000) + 4 * 60 * 60
 		}
 	}, {
 		timestamps: false,

@@ -15,7 +15,6 @@ const createProduct_H = async (product) => {
             store: product.store,
             discount: product.discount,
             image_url: product.image_url,
-            sent: false,
             message: product.message,
             market: product.market
         });

@@ -37,20 +37,18 @@ NORMAL_PRICE = 'normal_price'
 DISCOUNT = 'discount'
 ID = 'product_id'
 MESSAGE = 'message'
-PUBLISHING_TIME = 'publishing_time'
-STATE = 'state'
 
-name = ''
-store = ''
-sent = 'false'
-state_premium = 'PREMIUM'
-state_free = 'FREE'
+sentPREMIUM = 'false'
+sentFREE = 'false'
 minDiscountPREMIUM = 20
 maxDiscountPREMIUM = 100
 minDiscountFREE = 20
 maxDiscountFREE = 49
 
 sortOrder = ASC
-filters_premium = f'minDiscount={minDiscountPREMIUM}&maxDiscount={maxDiscountPREMIUM}&name={name}&store={store}&sent={sent}&state={state_premium}'
-filters_free = f'minDiscount={minDiscountFREE}&maxDiscount={maxDiscountFREE}&name={name}&store={store}&sent={sent}&state={state_free}'
-fields = f'{ID},{IMAGE_URL},{MESSAGE},{STATE},{STORE},{DISCOUNT}'
+filters_premium = f'minDiscount={minDiscountPREMIUM}&maxDiscount={maxDiscountPREMIUM}&sentPREMIUM={sentPREMIUM}'
+filters_free = f'minDiscount={minDiscountFREE}&maxDiscount={maxDiscountFREE}&sentFREE={sentFREE}'
+fields = f'{ID},{IMAGE_URL},{MESSAGE},{STORE},{DISCOUNT}'
+
+PREMIUM = 'PREMIUM'
+FREE = 'FREE'

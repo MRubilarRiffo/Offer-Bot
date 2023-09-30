@@ -15,10 +15,6 @@ const whereClause = (filters) => {
         };
     };
 
-    if (filters.state) {
-        whereClause.state = filters.state;
-    };
-
     if (filters.minDiscount || filters.maxDiscount) {
         whereClause.discount = {};
     
@@ -31,8 +27,24 @@ const whereClause = (filters) => {
         };
     };
 
-    if (filters.sent === 'false' || filters.sent === 'true') {
-        whereClause.sent = filters.sent
+    if (filters.sent_to_group_PREMIUM === 'false' || filters.sent_to_group_PREMIUM === 'true') {
+        whereClause.sent_to_group_PREMIUM = filters.sent_to_group_PREMIUM;
+    };
+
+    if (filters.sent_to_group_FREE === 'false' || filters.sent_to_group_FREE === 'true') {
+        whereClause.sent_to_group_FREE = filters.sent_to_group_FREE;
+    };
+
+    if (filters.sent_to_group_FREE && filters.date) {
+        whereClause.group_FREE_send_time = {
+            [Op.lte]: filters.date
+        };
+    };
+    
+    if (filters.sent_to_group_PREMIUM && filters.date) {
+        whereClause.group_PREMIUM_send_time = {
+            [Op.lte]: filters.date
+        };
     };
 
     return whereClause;

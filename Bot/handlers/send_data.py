@@ -5,7 +5,7 @@ from .send_product import send_product
 from telegram import Bot
 from telegram.error import InvalidToken
 
-async def send_data(TOKEN, sortOrder, fields, CANAL_ID, filters):
+async def send_data(TOKEN, sortOrder, fields, CANAL_ID, filters, state):
     total_page = 1
     page = 1
     token_index = 0
@@ -32,7 +32,7 @@ async def send_data(TOKEN, sortOrder, fields, CANAL_ID, filters):
                     try:
                         token = TOKEN[token_index % len(TOKEN)]
                         bot = Bot(token=token)
-                        await send_product(client, bot, product, CANAL_ID)
+                        await send_product(client, bot, product, CANAL_ID, state)
                         token_index += 1
                         break
                     except InvalidToken:
