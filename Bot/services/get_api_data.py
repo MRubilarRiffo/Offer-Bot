@@ -3,7 +3,7 @@ import time
 from utilities.log_message import log_message
 
 async def get_api_data(client, page, sortOrder, fields, filters):
-    date = int(time.time()) + (4 * 60 * 60)
+    date = int(time.time())
 
     api_url = f'http://localhost:3001/products?sortOrder={sortOrder}&fields={fields}&page={page}&{filters}&date={date}'
 

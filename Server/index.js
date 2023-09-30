@@ -33,7 +33,7 @@ const executeTask = async () => {
     };
 };
 
-conn.sync({ force: true })
+conn.sync({ force: false })
     .then(() => {
         server.listen(PORT, () => logMessage(`Server listening on port ${PORT}`));
     })
