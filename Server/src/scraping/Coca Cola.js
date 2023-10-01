@@ -57,7 +57,7 @@ const getCocaCola = async () => {
                 for (let product of products) {
                     const id = product.productId ? `Coca-Cola-${product.productId}` : null;
                     
-                    if (!id ) continue;
+                    if (!id) continue;
                     const props = createMessageHTML(
                         product.productName,
                         [MARKET],

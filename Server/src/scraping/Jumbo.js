@@ -47,8 +47,8 @@ const getJumbo = async () => {
                         const props = createMessageHTML(
                             product.productName,
                             [MARKET],
-                            product.items[0].sellers[0].commertialOffer.ListPrice,
-                            product.items[0].sellers[0].commertialOffer.Price,
+                            Math.round(product.items[0].sellers[0].commertialOffer.ListPrice),
+                            Math.round(product.items[0].sellers[0].commertialOffer.Price),
                             Math.round(100-(product.items[0].sellers[0].commertialOffer.Price * 100 / product.items[0].sellers[0].commertialOffer.ListPrice)),
                             `https://www.jumbo.cl/${product.linkText}/p`,
                             id,

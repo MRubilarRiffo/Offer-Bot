@@ -15,7 +15,7 @@ const HEADERS = {
     Connection: 'keep-alive'
 };
 
-const adidas = async () => {
+const getAdidas = async () => {
     try {
         const countProducts = await getTotalProducts({ market: MARKET });
 
@@ -61,4 +61,4 @@ const adidas = async () => {
     };
 };
 
-module.exports = { adidas };
+module.exports = { getAdidas };

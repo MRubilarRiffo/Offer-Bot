@@ -6,7 +6,8 @@ const { getJumbo } = require('./src/scraping/Jumbo');
 const { logMessage } = require('./src/helpers/logMessage');
 const { getUnimarc } = require('./src/scraping/Unimarc');
 // const { getCocaCola } = require('./src/scraping/Coca Cola');
-const { adidas } = require('./src/scraping/Adidas');
+const { getAdidas } = require('./src/scraping/Adidas');
+const { getZapatos } = require('./src/scraping/Zapatos');
 // const { getEasy } = require('./src/scraping/Easy');
 
 const PORT = 3001;
@@ -16,13 +17,15 @@ const MINUTES = 20
 const executeTask = async () => {
     try {
         // await getEasy();
-        // await adidas();
+        // await getAdidas();
         // await getCocaCola() CORREGIR
+
         await Promise.all([
-            adidas(),
+            getAdidas(),
             getKnasta(),
             getUnimarc(),
-            getJumbo()
+            getJumbo(),
+            getZapatos()
         ]);
         
         logMessage('Tarea programada ejecutada');
