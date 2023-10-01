@@ -48,7 +48,7 @@ sentFREE = 'false'
 minDiscountPREMIUM = 20
 maxDiscountPREMIUM = 100
 minDiscountFREE = 20
-maxDiscountFREE = 49
+maxDiscountFREE = 100
 
 sortOrder = ASC
 filters_premium = f'minDiscount={minDiscountPREMIUM}&maxDiscount={maxDiscountPREMIUM}&sentPREMIUM={sentPREMIUM}'
