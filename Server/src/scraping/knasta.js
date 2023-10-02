@@ -16,7 +16,7 @@ const getKnasta = async () => {
         while (page <= totalPages) {
             logMessage(`Kanasta | Page: ${page} of ${totalPages}`);
 
-            const api = `${BASE_URL}/_next/data/8223c0c755711a83aabf91debc5a3fba60bf78b3/es/results.json?knastaday=1&d=-0&page=${page}`;
+            const api = `${BASE_URL}/_next/data/197f4d1f7608fdf96f146b11b2e4203002700ea5/es/results.json?knastaday=1&d=-0&page=${page}`;
             
             const data = await requestsAPI(api);
 

@@ -21,8 +21,8 @@ const executeTask = async () => {
         // await getCocaCola() CORREGIR
 
         await Promise.all([
-            getAdidas(),
             getKnasta(),
+            getAdidas(),
             getUnimarc(),
             getJumbo(),
             getZapatos()
