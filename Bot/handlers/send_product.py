@@ -1,3 +1,4 @@
+import os
 import io
 import asyncio
 from services.update_product import update_product
@@ -28,7 +29,16 @@ async def fetch_image(client, url):
             await asyncio.sleep(5)
 
     log_message("Se han agotado los intentos para descargar la imagen.")
-    return None
+
+    not_found_path = os.path.join('files', 'not found.png')
+    with open(not_found_path, 'rb') as not_found_image:
+        photo = io.BytesIO(not_found_image.read())
+        photo.name = "not_found.png"
+
+        if not photo:
+            return None
+        
+        return photo
 
 async def send_product(client, bot, product, CANAL_ID, state):
     product_id = product.get('product_id', None)

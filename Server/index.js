@@ -21,11 +21,11 @@ const executeTask = async () => {
         // await getCocaCola() CORREGIR
 
         await Promise.all([
-            // getKnasta(),
+            getKnasta(),
             getAdidas(),
-            // getUnimarc(),
-            // getJumbo(),
-            // getZapatos()
+            getUnimarc(),
+            getJumbo(),
+            getZapatos()
         ]);
         
         logMessage('Tarea programada ejecutada');
